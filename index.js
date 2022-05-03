@@ -32,3 +32,7 @@ function displayBooks() {
         books.append(card);
     }
 }
+
+document.addEventListener('DOMContentLoaded'), function() {
+    displayBooks();
+}
