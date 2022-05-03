@@ -9,16 +9,14 @@ function Book(title,author,genre,year,numPages) {
 }
 
 const testBook = new Book('My Life','John','Memoirs',2010,100)
-
-console.log(testBook);
+const testBook2 = new Book('My Dreams','Eve','Memoirs',2011,200)
 
 function addBookToLibrary(book) {
   myLibrary.push(book)
 }
 
 addBookToLibrary(testBook);
-
-console.log(myLibrary);
+addBookToLibrary(testBook2);
 
 function displayBooks() {
     const books = document.getElementById('books');
@@ -29,11 +27,16 @@ function displayBooks() {
       card.className = "card";
       card.innerHTML =
         `
-        <div class="title">${book.title}</div>
-        <div class="author">${book.author}</div>
-        <div class="genre">${book.genre}</div>
-        <div class="year">${book.year}</div>
-        <div class="numPages">${book.numPages}</div>
+        <div class="card-body">
+          <h5 class="card-title">${book.title}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
+          <p class="card-text">
+          Genre: ${book.genre}<br>
+          Year: ${book.year}<br>
+          Pages: ${book.numPages}</p>
+          <a href="#" class="card-link">Link</a>
+          <a href="#" class="card-link">Link</a>
+        </div>
         `;    
       books.append(card);
     }
