@@ -33,6 +33,4 @@ function displayBooks() {
     }
 }
 
-document.addEventListener('DOMContentLoaded'), function() {
-    displayBooks();
-}
+document.addEventListener('DOMContentLoaded', displayBooks)
