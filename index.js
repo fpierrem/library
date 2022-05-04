@@ -2,10 +2,10 @@ let myLibrary = [];
 
 function Book(title,author,genre,year,numPages) {
   this.title = title
-  this.author = author
+  this.author = author || "n/a"
   this.genre = genre
-  this.year = year
-  this.numPages = numPages
+  this.year = year || "n/a"
+  this.numPages = numPages || "n/a"
 }
 
 let books = document.getElementById('books');
@@ -47,11 +47,11 @@ function modalControl() {
   
   const newBookButton = document.getElementById('new-book-button');
   const newBookModal = document.getElementById('new-book-modal');
-  const submitButton = document.getElementById('submit-button');
+  const newBookForm = document.getElementById('new-book-form');
   
   newBookButton.onclick = () => {
     showModal();
-    submitButton.onclick = () => {
+    newBookForm.onsubmit = () => {
       processInput();
       closeModal();
     }
@@ -71,11 +71,11 @@ function modalControl() {
   }
 
   function processInput() {
-    const title = document.getElementById('title').value;
-    const author = document.getElementById('author').value;
-    const year = document.getElementById('year').value;
-    const numPages = document.getElementById('numPages').value;
-    const genre = document.getElementById('genre').value;
+    const title = document.getElementById('new-book-form')['title'].value;
+    const author = document.getElementById('new-book-form')['author'].value;
+    const year = document.getElementById('new-book-form')['year'].value;
+    const numPages = document.getElementById('new-book-form')['numPages'].value;
+    const genre = document.getElementById('new-book-form')['genre'].value;
     const book = new Book(title,author,genre,year,numPages);
     addBookToLibrary(book);
     displayBook(book);

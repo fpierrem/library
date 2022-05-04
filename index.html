@@ -19,22 +19,25 @@
     <!-- New book entry modal -->
       <div id="new-book-modal" class="modal">
         <div class="modal-content">
-          <input type="text" placeholder="Title" id="title"><br>
-          <input type="text" placeholder="Author" id="author"><br>
-          <input type="text" placeholder="Year" id="year"><br>
-          <input type="text" placeholder="Number of pages" id="numPages"><br>
-          <div>
-            <label for="genre">Genre</label>
-            <select name="genre" id="genre" form="new-book-form">
-              <option value="Novel">Novel</option>
-              <option value="Essay">Essay</option>
-              <option value="Textbook">Textbook</option>
-              <option value="Other">Other</option>
-            </select>
-          </div><br>
-          <label for="read">Read</label>
-          <input type="checkbox" id="read" name="read"><br>
-          <button id="submit-button" class="submit-button">Add book</button>
+          <form id="new-book-form" action="javascript:void(0);">
+            <input type="text" placeholder="Title" name="title" required><br>
+            <input type="text" placeholder="Author" name="author"><br>
+            <input type="text" placeholder="Year" name="year"><br>
+            <input type="text" placeholder="Number of pages" name="numPages"><br>
+            <div>
+              <label for="genre">Genre</label>
+              <select name="genre" id="genre" form="new-book-form">
+                <option value="none" selected disabled hidden>Select genre</option>
+                <option value="Novel">Novel</option>
+                <option value="Essay">Essay</option>
+                <option value="Textbook">Textbook</option>
+                <option value="Other">Other</option>
+              </select>
+            </div><br>
+            <label for="read">Read</label>
+            <input type="checkbox" id="read" name="read"><br>
+            <input type="submit" value="Save">
+          </form>
         </div>
       </div>
 	<script src="index.js"></script>
