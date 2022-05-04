@@ -29,14 +29,14 @@ function displayBook(book) {
   card.className = "card";
   card.innerHTML =
     `
-    <div class="card-body">
+    <div data-id="${myLibrary.length}" id="book-card" class="book-card">
       <h5 class="card-title">${book.title}</h5>
       <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
       <p class="card-text">
       Genre: ${book.genre}<br>
       Year: ${book.year}<br>
       Pages: ${book.numPages}</p>
-      <a href="#" class="card-link">Link</a>
+      <button class="delete-button" id="delete-button">Remove</button>
       <a href="#" class="card-link">Link</a>
     </div>
     `;    
@@ -53,6 +53,7 @@ function modalControl() {
     showModal();
     newBookForm.onsubmit = () => {
       processInput();
+      newBookForm.reset();
       closeModal();
     }
     window.onclick = (event) => {
@@ -79,11 +80,31 @@ function modalControl() {
     const book = new Book(title,author,genre,year,numPages);
     addBookToLibrary(book);
     displayBook(book);
+    buttonsControl();
   }
+}
+
+function buttonsControl() {
+  document.querySelectorAll("#book-card").forEach((element) => {
+    const bookIndex = element.dataset.id;
+    const book = myLibrary[bookIndex];
+    const card = element.parentNode;
+    const deleteButton = element.querySelector("#delete-button");
+    // const readButton = element.querySelector("#read-button");
+
+    deleteButton.onclick = () => {
+      myLibrary.splice(bookIndex);
+      card.remove();
+    }
+    // readButton.onclick = () => {
+    //   alert('read');
+    // }
+  })
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   displayAllBooks();
   modalControl();
+  buttonsControl();
 })
 
