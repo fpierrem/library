@@ -30,3 +30,33 @@
     width:24rem;
     background-color:thistle;
 }
+
+/* Read toggle switch */
+/* Source code: https://www.erikkroes.nl/blog/accessible-html-toggle-button-switch/ */
+[role="switch"] {  
+    padding: 0;
+    width: 3rem;
+    height: 1.5rem;
+    border: 0;
+    border-radius: 1rem;
+    /* background-color: greenyellow; */
+}
+
+[role="switch"][aria-checked="true"] {
+    background-color: #0a0;
+}
+
+[role="switch"] span {
+    color: white;
+    padding: 0.1rem;  
+    pointer-events: none;
+    border-radius: 2rem;
+}
+
+[role="switch"][aria-checked="false"] :last-child {
+    padding-left: .2em;
+}
+
+[role="switch"][aria-checked="true"] :last-child,[role="switch"][aria-checked="false"] :first-child {
+    background: white;
+}

@@ -1,23 +1,24 @@
 let myLibrary = [];
 
-function Book(title,author,genre,year,numPages) {
-  this.title = title
-  this.author = author || "n/a"
-  this.genre = genre
-  this.year = year || "n/a"
-  this.numPages = numPages || "n/a"
+function Book(title,author,genre,year,numPages,read) {
+  this.title = title;
+  this.author = author || "n/a";
+  this.genre = genre || "n/a";
+  this.year = year || "n/a";
+  this.numPages = numPages || "n/a";
+  this.read = read;
 }
 
 let books = document.getElementById('books');
 
-const testBook = new Book('My Life','John','Memoirs',2010,100)
-const testBook2 = new Book('My Dreams','Eve','Memoirs',2011,200)
+const testBook = new Book('My Life','John','Memoirs',2010,100,true);
+const testBook2 = new Book('My Dreams','Eve','Memoirs',2011,200,false);
 addBookToLibrary(testBook);
 addBookToLibrary(testBook2);
 
 
 function addBookToLibrary(book) {
-  myLibrary.push(book)
+  myLibrary.push(book);
 }
 
 function displayAllBooks() {
@@ -31,13 +32,18 @@ function displayBook(book) {
     `
     <div data-id="${myLibrary.length}" id="book-card" class="book-card">
       <h5 class="card-title">${book.title}</h5>
-      <h6 class="card-subtitle mb-2 text-muted">${book.author}</h6>
+      <h6 class="card-author">${book.author}</h6>
       <p class="card-text">
-      Genre: ${book.genre}<br>
-      Year: ${book.year}<br>
-      Pages: ${book.numPages}</p>
+        Genre: ${book.genre}<br>
+        Year: ${book.year}<br>
+        Pages: ${book.numPages}
+      </p>
       <button class="delete-button" id="delete-button">Remove</button>
-      <a href="#" class="card-link">Link</a>
+      <label for="read-toggle">Read
+        <button type="button" id="read-toggle" role="switch" aria-checked=${book.read}>
+          <span>yes</span><span>no</span>  
+        </button>
+      </label>
     </div>
     `;    
   books.append(card);
@@ -72,12 +78,15 @@ function modalControl() {
   }
 
   function processInput() {
-    const title = document.getElementById('new-book-form')['title'].value;
-    const author = document.getElementById('new-book-form')['author'].value;
-    const year = document.getElementById('new-book-form')['year'].value;
-    const numPages = document.getElementById('new-book-form')['numPages'].value;
-    const genre = document.getElementById('new-book-form')['genre'].value;
-    const book = new Book(title,author,genre,year,numPages);
+    const title = newBookForm['title'].value;
+    const author = newBookForm['author'].value;
+    const genre = newBookForm['genre'].value;
+    const year = newBookForm['year'].value;
+    const numPages = newBookForm['numPages'].value;
+    const read = newBookForm['read'].checked;
+    
+    const book = new Book(title,author,genre,year,numPages,read);
+    console.log(book);
     addBookToLibrary(book);
     displayBook(book);
     buttonsControl();
