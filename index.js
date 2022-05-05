@@ -11,10 +11,8 @@ function Book(title,author,genre,year,numPages,read) {
 
 let books = document.getElementById('books');
 
-const testBook = new Book('My Life','John','Memoirs',2010,100,true);
-const testBook2 = new Book('My Dreams','Eve','Memoirs',2011,200,false);
+const testBook = new Book('Example title','Author','Essay',2010,200,true);
 addBookToLibrary(testBook);
-addBookToLibrary(testBook2);
 
 
 function addBookToLibrary(book) {
@@ -30,7 +28,7 @@ function displayBook(book) {
   card.className = "card";
   card.innerHTML =
     `
-    <div data-id="${myLibrary.length}" id="book-card" class="book-card">
+    <div data-id="${myLibrary.indexOf(book)}" id="book-card" class="book-card">
       <h5 class="card-title">${book.title}</h5>
       <h6 class="card-author">${book.author}</h6>
       <p class="card-text">
@@ -41,7 +39,7 @@ function displayBook(book) {
       <button class="delete-button" id="delete-button">Remove</button>
       <label for="read-toggle">Read
         <button type="button" id="read-toggle" role="switch" aria-checked=${book.read}>
-          <span>yes</span><span>no</span>  
+          <span>yes</span><span>no&nbsp</span>  
         </button>
       </label>
     </div>
@@ -86,7 +84,6 @@ function modalControl() {
     const read = newBookForm['read'].checked;
     
     const book = new Book(title,author,genre,year,numPages,read);
-    console.log(book);
     addBookToLibrary(book);
     displayBook(book);
     buttonsControl();
@@ -99,15 +96,21 @@ function buttonsControl() {
     const book = myLibrary[bookIndex];
     const card = element.parentNode;
     const deleteButton = element.querySelector("#delete-button");
-    // const readButton = element.querySelector("#read-button");
+    const readButton = element.querySelector("#read-toggle");
 
     deleteButton.onclick = () => {
+      console.log(book);
       myLibrary.splice(bookIndex);
       card.remove();
     }
-    // readButton.onclick = () => {
-    //   alert('read');
-    // }
+
+    readButton.onclick = () => {  
+      let old_state = (readButton.getAttribute('aria-checked') === 'true');
+      let new_state = old_state ? false : true;
+      readButton.setAttribute('aria-checked', new_state);
+      book.read = new_state;
+      console.log(book.read);
+    }
   })
 }
 
