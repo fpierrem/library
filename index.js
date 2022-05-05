@@ -11,8 +11,8 @@ function Book(title,author,genre,year,numPages,read) {
 
 let books = document.getElementById('books');
 
-const testBook = new Book('Example title','Author','Essay',2010,200,true);
-addBookToLibrary(testBook);
+const exampleBook = new Book('Example title','Author','Essay',2010,200,true);
+addBookToLibrary(exampleBook);
 
 
 function addBookToLibrary(book) {
@@ -48,7 +48,6 @@ function displayBook(book) {
 }
 
 function modalControl() {
-  
   const newBookButton = document.getElementById('new-book-button');
   const newBookModal = document.getElementById('new-book-modal');
   const newBookForm = document.getElementById('new-book-form');
