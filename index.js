@@ -29,19 +29,27 @@ function displayBook(book) {
   card.innerHTML =
     `
     <div data-id="${myLibrary.indexOf(book)}" id="book-card" class="book-card">
-      <h5 class="card-title">${book.title}</h5>
+      
+      <h5 class="card-title">${book.title}&nbsp
+        <i id="delete-button" class="delete-button fa-solid fa-trash-can"></i>
+      </h5>
+      
       <h6 class="card-author">${book.author}</h6>
-      <p class="card-text">
+
+      <p class="card-info">
         Genre: ${book.genre}<br>
         Year: ${book.year}<br>
         Pages: ${book.numPages}
       </p>
-      <button class="delete-button" id="delete-button">Remove</button>
-      <label for="read-toggle">Read
-        <button type="button" id="read-toggle" role="switch" aria-checked=${book.read}>
-          <span>yes</span><span>no&nbsp</span>  
-        </button>
-      </label>
+
+      <div class="read-toggle-container">
+        <label for="read-toggle">Read&nbsp
+          <button type="button" id="read-toggle" role="switch" aria-checked=${book.read}>
+            <span>yes</span><span>no&nbsp</span>  
+          </button>
+        </label>
+      </div>
+
     </div>
     `;    
   books.append(card);

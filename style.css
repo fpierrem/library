@@ -1,15 +1,102 @@
-.container {
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700;900&family=Open+Sans:wght@300;400;800&family=Rubik:wght@400;700&display=swap');
+
+:root {
+    font-family: 'Open Sans', sans-serif;
+    --shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    background-color: whitesmoke;
+}
+
+* {
+    margin: 0;
+}
+
+.header {
+    background-color:white;
+    box-shadow: var(--shadow);
+    display:flex;
+    align-items: center;
+}
+
+.header > h1 {
+    font-size:44px;
+    font-weight: bold;
+    padding:1.5rem 1rem;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    margin-top:1.5rem;
+}
+
+.new-book-button {
+    margin:0 auto;
+    background-color: white;
+    box-shadow: var(--shadow);
+    font-size: 22px;
+    font-weight: bolder;
+    padding:0.5rem 1rem;
+    border:none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.new-book-button:hover {
+    filter: brightness(90%);
+    font-size: 24px;
+}
+
+.library-container {
+    margin: 1rem;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
     column-gap: 2rem;
-    padding: 1rem;
+    grid-auto-flow: column;
 }
 
 .card {
+    background-color: white;
     margin: 1rem;
     padding: 1rem;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    border-radius: 5%;
+    box-shadow: var(--shadow);
+    border-radius: 10px;
+    max-width:200px;
+}
+
+.card-top-container {
+    display:grid;
+    grid-template-columns: 5fr 1fr;
+}
+
+.delete-button {
+    color:lightgrey;
+    cursor: pointer;
+    /* text-align:center; */
+}
+
+.delete-button:hover {
+    color: grey;
+}
+
+.card-title {
+    font-size:18px;
+    padding-bottom:1rem;
+}
+
+.card-author {
+    font-size:16px;
+    padding-bottom:1rem;
+}
+
+.card-info {
+    font-size:15px;
+    padding-bottom:1.5rem;
+    border-bottom: 0.5px solid black;
+}
+
+.read-toggle-container {
+    margin-top: 1.5rem;
+    display:flex;
+    justify-content: center;
 }
 
 .modal {
