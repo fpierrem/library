@@ -30,9 +30,9 @@ function displayBook(book) {
     `
     <div data-id="${myLibrary.indexOf(book)}" id="book-card" class="book-card">
       
-      <h5 class="card-title">${book.title}&nbsp
-        <i id="delete-button" class="delete-button fa-solid fa-trash-can"></i>
-      </h5>
+      <i id="delete-button" class="delete-button fa-solid fa-xmark"></i>
+
+      <h5 class="card-title">${book.title}&nbsp</h5>
       
       <h6 class="card-author">${book.author}</h6>
 
@@ -43,7 +43,7 @@ function displayBook(book) {
       </p>
 
       <div class="read-toggle-container">
-        <label for="read-toggle">Read&nbsp
+        <label for="read-toggle">Read:
           <button type="button" id="read-toggle" role="switch" aria-checked=${book.read}>
             <span>yes</span><span>no&nbsp</span>  
           </button>

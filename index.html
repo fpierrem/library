@@ -13,7 +13,7 @@
   <body>
     <!-- Header -->
     <header class=header>
-      <h1>Library</h1>
+      <h1>Library App</h1>
     </header>
     <!-- Main container -->
     <div class="main-container">
@@ -25,24 +25,27 @@
       <!-- New book entry modal -->
       <div id="new-book-modal" class="modal">
         <div class="modal-content">
-          <form id="new-book-form" action="javascript:void(0);">
-            <input type="text" placeholder="Title" name="title" required><br>
-            <input type="text" placeholder="Author" name="author"><br>
-            <input type="text" placeholder="Year" name="year"><br>
-            <input type="text" placeholder="Number of pages" name="numPages"><br>
-            <div>
-              <label for="genre">Genre</label>
-              <select name="genre" id="genre" form="new-book-form">
-                <option value="none" selected disabled hidden>Select genre</option>
-                <option value="Novel">Novel</option>
-                <option value="Essay">Essay</option>
-                <option value="Textbook">Textbook</option>
-                <option value="Other">Other</option>
-              </select>
-            </div><br>
-            <label for="read">Read</label>
-            <input type="checkbox" id="read" name="read"><br>
-            <input type="submit" value="Save">
+          <form id="new-book-form" action="javascript:void(0);" autocomplete="off">
+            <h5 class="title">Add a new book</h5>
+            <input type="text" placeholder="Title" name="title" class="new-book-field" required autofocus>
+            <input type="text" placeholder="Author" name="author" class="new-book-field">
+            <input type="text" placeholder="Year" name="year" class="new-book-field">
+            <input type="text" placeholder="Number of pages" name="numPages" class="new-book-field">
+
+            <select name="genre" id="genre" form="new-book-form" class="new-book-field">
+              <option value="none" selected disabled hidden>Select genre</option>
+              <option value="Novel">Novel</option>
+              <option value="Essay">Essay</option>
+              <option value="Textbook">Textbook</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <div class="new-book-field">
+              <label for="read" class="new-book-field">Read?</label>
+              <input type="checkbox" id="read" name="read"><br>
+            </div>
+
+            <button type="submit">Save</button>
           </form>
         </div>
       </div>
