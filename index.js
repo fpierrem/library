@@ -1,4 +1,4 @@
-let myLibrary = [];
+let myLibrary;
 
 function Book(title,author,genre,year,numPages,read) {
   this.title = title;
@@ -12,13 +12,39 @@ function Book(title,author,genre,year,numPages,read) {
 let books = document.getElementById('books');
 
 const exampleBook = new Book('Example title','Author','Essay',2010,200,true);
-addBookToLibrary(exampleBook);
 
+// Back-end functions
+function checkLocalStorage() {
+  if (localStorage.getItem('library')) {
+    myLibrary = JSON.parse(localStorage.getItem('library'));
+  } else {
+    myLibrary = [];
+    addBookToLibrary(exampleBook);
+  }
+}
 
 function addBookToLibrary(book) {
   myLibrary.push(book);
+  updateLocalStorage();
 }
 
+function removeBook(bookIndex) {
+  console.log(bookIndex);
+  myLibrary.splice(bookIndex,1);
+  updateLocalStorage()
+}
+
+function markAsRead(bookIndex) {
+  console.log(bookIndex);
+  myLibrary[bookIndex].read = (myLibrary[bookIndex].read === true) ? false : true;
+  updateLocalStorage()
+}
+
+function updateLocalStorage() {
+  localStorage.setItem('library',JSON.stringify(myLibrary));
+}
+
+// UI functions
 function displayAllBooks() {
   myLibrary.forEach(displayBook);
 }
@@ -106,24 +132,23 @@ function buttonsControl() {
     const readButton = element.querySelector("#read-toggle");
 
     deleteButton.onclick = () => {
-      console.log(book);
-      myLibrary.splice(bookIndex);
+      removeBook(bookIndex);
       card.remove();
     }
 
-    readButton.onclick = () => {  
-      let old_state = (readButton.getAttribute('aria-checked') === 'true');
-      let new_state = old_state ? false : true;
-      readButton.setAttribute('aria-checked', new_state);
-      book.read = new_state;
-      console.log(book.read);
+    readButton.onclick = () => {
+      markAsRead(bookIndex);  
+      readButton.setAttribute('aria-checked', book.read);
     }
   })
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
+  checkLocalStorage();
   displayAllBooks();
   modalControl();
   buttonsControl();
+  updateLocalStorage();
 })
 
