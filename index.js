@@ -31,6 +31,7 @@ function generateId() {
 }
 
 function addBookToLibrary(book) {
+  // console.log(localStorage.getItem('library'));
   myLibrary.push(book);
   updateLocalStorage();
 }

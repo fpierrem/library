@@ -133,6 +133,10 @@
     gap:1rem; 
 }
 
+.modal-content > form > select {
+    box-sizing:content-box;
+}
+
 .modal-content > form > button {
     background-color: lightgrey;
     color:black;
@@ -141,6 +145,7 @@
     border:none;
     width:90%;
     padding:0.5rem;
+    box-sizing:content-box;
     border-radius: 10px;
     cursor: pointer;
 }
