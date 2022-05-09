@@ -1,6 +1,7 @@
 let myLibrary;
 
-function Book(title,author,genre,year,numPages,read) {
+function Book(id,title,author,genre,year,numPages,read) {
+  this.id = id;
   this.title = title;
   this.author = author || "n/a";
   this.genre = genre || "n/a";
@@ -9,9 +10,7 @@ function Book(title,author,genre,year,numPages,read) {
   this.read = read;
 }
 
-let books = document.getElementById('books');
-
-const exampleBook = new Book('Example title','Author','Essay',2010,200,true);
+const exampleBook = new Book(0,'Example title','Author','Essay',2010,200,true);
 
 // Back-end functions
 function checkLocalStorage() {
@@ -23,20 +22,28 @@ function checkLocalStorage() {
   }
 }
 
+function generateId() {
+  let ids = myLibrary.map(book => book.id);
+  console.log(ids);
+  // NB- Spreading the array with three dots as Math.max expects all numbers to be passed as arguments
+  console.log(Math.max(...ids));
+  return Math.max(...ids) + 1;
+}
+
 function addBookToLibrary(book) {
   myLibrary.push(book);
   updateLocalStorage();
 }
 
-function removeBook(bookIndex) {
-  console.log(bookIndex);
-  myLibrary.splice(bookIndex,1);
+function removeBook(book) {
+  console.log(book.id);
+  myLibrary.splice(myLibrary.indexOf(book),1);
   updateLocalStorage()
 }
 
-function markAsRead(bookIndex) {
-  console.log(bookIndex);
-  myLibrary[bookIndex].read = (myLibrary[bookIndex].read === true) ? false : true;
+function markAsRead(book) {
+  console.log(book.id);
+  book.read = (book.read === true) ? false : true;
   updateLocalStorage()
 }
 
@@ -50,11 +57,12 @@ function displayAllBooks() {
 }
 
 function displayBook(book) {
+  let bookCards = document.getElementById('books');
   const card = document.createElement('div');
   card.className = "card";
   card.innerHTML =
     `
-    <div data-id="${myLibrary.indexOf(book)}" id="book-card" class="book-card">
+    <div data-id="${book.id}" id="book-card" class="book-card">
       
       <i id="delete-button" class="delete-button fa-solid fa-xmark"></i>
 
@@ -78,7 +86,7 @@ function displayBook(book) {
 
     </div>
     `;    
-  books.append(card);
+  bookCards.append(card);
 }
 
 function modalControl() {
@@ -115,8 +123,8 @@ function modalControl() {
     const year = newBookForm['year'].value;
     const numPages = newBookForm['numPages'].value;
     const read = newBookForm['read'].checked;
-    
-    const book = new Book(title,author,genre,year,numPages,read);
+    const id = generateId();
+    const book = new Book(id,title,author,genre,year,numPages,read);
     addBookToLibrary(book);
     displayBook(book);
     buttonsControl();
@@ -125,19 +133,19 @@ function modalControl() {
 
 function buttonsControl() {
   document.querySelectorAll("#book-card").forEach((element) => {
-    const bookIndex = element.dataset.id;
-    const book = myLibrary[bookIndex];
+    const id = Number(element.dataset.id);
+    const book = myLibrary.find(b => b.id === id);
     const card = element.parentNode;
     const deleteButton = element.querySelector("#delete-button");
     const readButton = element.querySelector("#read-toggle");
 
     deleteButton.onclick = () => {
-      removeBook(bookIndex);
+      removeBook(book);
       card.remove();
     }
 
     readButton.onclick = () => {
-      markAsRead(bookIndex);  
+      markAsRead(book);  
       readButton.setAttribute('aria-checked', book.read);
     }
   })
