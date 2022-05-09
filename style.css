@@ -24,6 +24,9 @@
 }
 
 .main-container {
+    position:relative;
+    min-height: 80vh;
+    padding-bottom: 2.5rem;
     display: flex;
     flex-direction: column;
     margin-top:1.5rem;
@@ -199,3 +202,21 @@
 [role="switch"][aria-checked="true"] :last-child,[role="switch"][aria-checked="false"] :first-child {
     background: white;
 }
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+footer > a {
+    cursor: pointer;
+}
+
+footer > a:active, a:visited {
+    color: black;
+}
+
