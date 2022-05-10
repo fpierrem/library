@@ -19,13 +19,22 @@
     <div class="main-container">
     <!-- New book button -->
       <button id="new-book-button" class="new-book-button">Add book</button>
+      <!-- Display filters -->
+      <div class="filter-buttons-container">
+        Show:
+        <span id="filter-button" class="filter-button selected">All</span>
+        <span> | </span>
+        <span id="filter-button" class="filter-button">Read</span>
+        <span> | </span>
+        <span id="filter-button" class="filter-button">Unread</span>
+      </div>
       <!-- Book cards -->
       <div id="books" class="library-container">
       </div>
       <!-- Footer -->
       <footer>
         <p>
-          Florian Boyer
+          © Florian Boyer
           <a href="https://github.com/fpierrem/library" target="_blank"><i class="fa-brands fa-github"></i></a>
         </p>        
       </footer>

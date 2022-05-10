@@ -20,7 +20,7 @@
 .header > h1 {
     font-size:40px;
     font-weight: bold;
-    padding:1.5rem 1rem;
+    padding:1.5rem;
 }
 
 .main-container {
@@ -48,18 +48,32 @@
     filter: brightness(90%);
 }
 
+.filter-buttons-container {
+    width:100%;
+    text-align: left;
+    margin:1rem 1rem 0 1.5rem;
+}
+
+.filter-button {
+    cursor: pointer;
+}
+
+.filter-button.selected {
+    font-weight:bold;
+}
+
 .library-container {
     width: 100%;
-    margin: 1rem;
+    margin: 1.5rem;
     display: grid;
-    column-gap: 2rem;
+    gap: 2rem;
     grid-template-columns: repeat(auto-fill, 220px);
 }
 
 .card {
     position: relative;
     background-color: white;
-    margin: 1rem;
+    /* margin: 1rem; */
     padding: 1rem;
     padding-bottom: 0.5rem;
     box-shadow: var(--shadow);
@@ -205,8 +219,7 @@
 
 footer {
     position: absolute;
-    bottom: 0px;
-    margin-bottom: 10px;
+    bottom: 20px;
     display: flex;
     justify-content: center;
     width: 100%;

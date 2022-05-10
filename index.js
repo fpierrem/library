@@ -1,4 +1,5 @@
 let myLibrary;
+let filter = "all";
 
 function Book(id,title,author,genre,year,numPages,read) {
   this.id = id;
@@ -31,19 +32,16 @@ function generateId() {
 }
 
 function addBookToLibrary(book) {
-  // console.log(localStorage.getItem('library'));
   myLibrary.push(book);
   updateLocalStorage();
 }
 
 function removeBook(book) {
-  console.log(book.id);
   myLibrary.splice(myLibrary.indexOf(book),1);
   updateLocalStorage()
 }
 
 function markAsRead(book) {
-  console.log(book.id);
   book.read = (book.read === true) ? false : true;
   updateLocalStorage()
 }
@@ -52,9 +50,18 @@ function updateLocalStorage() {
   localStorage.setItem('library',JSON.stringify(myLibrary));
 }
 
+
 // UI functions
+
 function displayAllBooks() {
-  myLibrary.forEach(displayBook);
+  // Starts by clearing out all book cards
+  document.getElementById('books').innerHTML = "";
+  // Determines which book card to display based on filter
+  myLibrary.forEach((book) => {
+    if (filter === "all" || (filter === "read" && book.read) || (filter === "unread" && !book.read)) {
+      displayBook(book);
+    };
+  });
 }
 
 function displayBook(book) {
@@ -128,11 +135,11 @@ function modalControl() {
     const book = new Book(id,title,author,genre,year,numPages,read);
     addBookToLibrary(book);
     displayBook(book);
-    buttonsControl();
+    cardButtonsControl();
   }
 }
 
-function buttonsControl() {
+function cardButtonsControl() {
   document.querySelectorAll("#book-card").forEach((element) => {
     const id = Number(element.dataset.id);
     const book = myLibrary.find(b => b.id === id);
@@ -152,12 +159,26 @@ function buttonsControl() {
   })
 }
 
+function filtersControl() {
+  let filters = document.querySelectorAll("#filter-button");
+  filters.forEach((element) => {
+    element.onclick = () => {
+      filters.forEach((e) => {
+        e.className = "filter-button";
+      })
+      element.classList.add("selected");
+      filter = element.innerHTML.toLowerCase();
+      displayAllBooks();
+    }
+  });
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   checkLocalStorage();
   displayAllBooks();
+  filtersControl();
   modalControl();
-  buttonsControl();
+  cardButtonsControl();
   updateLocalStorage();
 })
 
