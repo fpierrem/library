@@ -56,11 +56,12 @@ function updateLocalStorage() {
 function displayAllBooks() {
   // Starts by clearing out all book cards
   document.getElementById('books').innerHTML = "";
-  // Determines which book card to display based on filter
+  // Determines which book card to display based on filter, display cards and add card controls
   myLibrary.forEach((book) => {
     if (filter === "all" || (filter === "read" && book.read) || (filter === "unread" && !book.read)) {
       displayBook(book);
     };
+    cardButtonsControl();
   });
 }
 
@@ -178,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
   displayAllBooks();
   filtersControl();
   modalControl();
-  cardButtonsControl();
   updateLocalStorage();
 })
 
